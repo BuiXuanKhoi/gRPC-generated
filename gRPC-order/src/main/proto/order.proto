@@ -1,0 +1,62 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+
+message PagingRequest{
+  int32 limit = 1;
+  int32 offset = 2;
+  bool isSort = 3;
+  string sortBy = 4;
+  string sortMode = 5;
+}
+message CreateOrderMessage{
+  repeated string cartId = 1;
+  string userId = 3;
+  OrderStatus status = 2;
+}
+
+message OrderDetail{
+  string orderId = 1;
+  string productId = 2;
+  string quantity = 3;
+  float unitPrice = 4;
+  float totalPrice = 5;
+  OrderStatus status = 6;
+  string createDate = 7;
+  string updateDate = 8;
+}
+
+message AllOrdersDetail{
+  PagingRequest pagingRequest = 2;
+  repeated OrderDetail ordersDetail = 1;
+}
+
+message GetOrderDetailRequest{
+  string userId = 2;
+  string orderId = 1;
+}
+
+message GetAllOrderByUserRequest{
+  string userId = 1;
+}
+
+message EmptyMessage{}
+
+
+service OrderGRPC{
+  rpc CreateOrder(CreateOrderMessage) returns (OrderDetail) {};
+  rpc UpdateOrder (CreateOrderMessage) returns (OrderDetail) {};
+
+  rpc RemoveOrder (GetOrderDetailRequest) returns (EmptyMessage) {};
+
+  rpc GetOrderDetail (GetOrderDetailRequest) returns (OrderDetail) {};
+  rpc GetAllOrdersByUser ( GetAllOrderByUserRequest) returns (AllOrdersDetail) {};
+}
+
+enum OrderStatus{
+  PREPARED = 0;
+  PACKAGED = 1;
+  DELIVERED = 2;
+  RECEIVED = 3;
+  COMPLETED = 4;
+}

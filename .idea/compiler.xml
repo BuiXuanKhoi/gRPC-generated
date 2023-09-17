@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="gRPC-customer" />
+        <module name="gRPC-cart" />
+        <module name="gRPC-product" />
+        <module name="gRPC-common" />
+        <module name="gRPC-order" />
+        <module name="gRPC-serialize" />
+        <module name="gRPC-payment" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gRPC-finnacial" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

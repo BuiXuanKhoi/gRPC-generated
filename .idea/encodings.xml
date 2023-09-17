@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/gRPC-cart/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-cart/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-customer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-customer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-finnacial/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-finnacial/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-payment/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-payment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-product/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-product/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-serialize/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gRPC-serialize/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

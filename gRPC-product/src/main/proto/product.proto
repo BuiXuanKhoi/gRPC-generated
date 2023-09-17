@@ -1,0 +1,162 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option java_package = "org.example.proto.generated";
+
+
+message StandardRespond{
+  int32 statusCode = 1;
+  string message = 2;
+}
+
+enum Criteria{
+  NAME = 0;
+  PRICE = 1;
+  QUANTITY = 3;
+  CREATE_DATE = 2;
+}
+
+enum PagingAction{
+  NEXT = 0;
+  BACK = 1;
+}
+
+enum FilterScope{
+  LOWER = 0;
+  EQUAL = 1;
+  LARGER = 2;
+}
+
+
+
+message PagingMessage{
+  int32 capacity = 4;
+  int32 currentPage = 5;
+  int32 previousPage = 6;
+  int32 nextPage = 7;
+
+  bool isAsc = 2;
+  bool isSort = 9;
+  repeated Criteria sortCriteria = 3;
+  repeated Criteria filterCriteria = 10;
+  FilterScope filterScope = 1;
+  PagingAction action = 8;
+}
+
+message PagingResponse{
+  int32 capacity = 4;
+  int32 currentPage = 5;
+  int32 previousPage = 6;
+  bool isAsc = 2;
+  bool isSort = 9;
+  repeated Criteria sortCriteria = 3;
+  repeated Criteria filterCriteria = 10;
+}
+
+message SearchProductResult{
+  PagingResponse pagingResponse = 1;
+  repeated ProductView productView = 2;
+
+}
+
+message ProductView{
+  string id = 1;
+  string name = 2;
+  repeated string catalogId = 3;
+  float unitPrice = 4;
+  int32 quantity = 5;
+  string productAvatarUrl = 6;
+}
+
+message ProductDetail{
+  string id = 1;
+  string name = 2;
+  double price = 3;
+  int32 quantity = 9;
+  string description = 4;
+  string ownerId = 5;
+  string createDate = 6;
+  string updateDate = 7;
+  repeated string productMediaUrl = 8;
+}
+
+message CreateProductRequest{
+  string name = 1;
+  double price = 2;
+  string description = 3;
+  string ownerId = 4;
+  repeated string catalogId = 5;
+  ProductStatus status = 6;
+  int32 quantity = 7;
+  repeated CreateProductMediaRequest asset = 8;
+}
+
+message CreateProductMediaRequest{
+  bytes productMedia = 1;
+}
+
+message UpdateProductRequest{
+  CreateProductRequest createProductRequest = 1;
+  string productId = 2;
+}
+
+message SellProductRequest {
+  string productId = 1;
+  double price = 2;
+  ProductStatus productStatus = 3;
+  int32 sellQuantity = 4;
+}
+
+enum ProductStatus {
+  OUT_OF_STOCK = 0;
+  EXISTED = 1;
+  OUT_OF_DATE = 2;
+  PROMOTED = 3;
+  BANNED = 4;
+}
+
+message ProductGetDetailRequest{
+  string id = 1;
+}
+
+message ProductsGetDetailRequest{
+  string id = 1;
+}
+
+message ProductsDetail{
+  repeated ProductDetail productsDetail = 1;
+}
+
+message CreateProductsRequest {
+  repeated CreateProductRequest createProductsRequest = 1;
+}
+
+message UpdateProductsRequest {
+  repeated UpdateProductRequest updateProductsRequest = 1;
+}
+
+message SearchProductMessage{
+  string name = 1;
+  PagingMessage pagingMessage = 2;
+}
+
+message EmptyMessage{}
+
+
+service ProductGRPC{
+  rpc GetProductDetailById (ProductGetDetailRequest) returns (ProductDetail) {};
+  rpc GetMultiProductDetailById (ProductsGetDetailRequest) returns (ProductsDetail) {};
+  rpc GetAllProducts (EmptyMessage) returns (ProductsDetail) {};
+  rpc SearchProductByName (SearchProductMessage) returns (SearchProductResult) {};
+
+  rpc RemoveProductById (ProductGetDetailRequest) returns (StandardRespond) {};
+  rpc RemoveMultiProductById (ProductsGetDetailRequest) returns (StandardRespond) {};
+
+  rpc CreateProduct (CreateProductRequest) returns (ProductDetail) {};
+  rpc CreateMultiProduct (CreateProductsRequest) returns (ProductsDetail) {};
+
+  rpc UpdateProduct (UpdateProductRequest) returns (ProductDetail) {};
+  rpc UpdateMultiProduct (UpdateProductsRequest) returns (ProductsDetail) {};
+
+  rpc SellProduct (SellProductRequest) returns (StandardRespond){};
+}

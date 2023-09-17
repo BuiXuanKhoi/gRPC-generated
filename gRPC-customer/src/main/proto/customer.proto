@@ -1,0 +1,108 @@
+syntax="proto3";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+package org.example.generated;
+
+message AuditMessage{
+  string createdDate = 1;
+}
+
+message LoginMessage{
+  string username = 1;
+  string password = 2;
+}
+
+message SignupMessage{
+  string username = 1;
+  string password = 2;
+  string firstname = 3;
+  string lastname = 4;
+  string phoneNumber = 5;
+  string emailAddress = 6;
+  string dateOfBirth = 7;
+}
+
+message CreateAdminMessage{
+  SignupMessage signupMessage = 1;
+  string createdBy = 2;
+}
+
+message UpdateInformationMessage{
+  string userId = 1;
+  string dateOfBirth = 2;
+  string firstname = 3;
+  string lastname = 4;
+  string phoneNumber = 5;
+  string emailAddress = 6;
+  string username = 7;
+}
+
+message GetInformationMessage{
+  string userId = 1;
+}
+
+message ChangePasswordMessage{
+  string oldPassword = 1;
+  string newPassword = 2;
+}
+
+message UserInformation{
+  string username = 1;
+  AuditMessage audit = 2;
+  string firstname = 3;
+  string lastname = 4;
+  string phoneNumber = 5;
+}
+
+message LoginDetail{
+  UserInformation information = 1;
+  JwtDetail jwtDetail = 2;
+}
+
+message TopUpMessage{
+  string userId = 1;
+  double amount = 2;
+  AuditMessage audit = 3;
+}
+
+message WithDrawMessage{
+  string userId = 1;
+  double amount = 2;
+  AuditMessage audit = 3;
+}
+
+message JwtDetail{
+  string token = 1;
+  string refreshToken = 2;
+  string expiredTime = 3;
+}
+
+message RemindPasswordMessage {
+  string email = 1;
+}
+
+message RetakePasswordMessage{
+  string newPassword = 1;
+  string token = 2;
+}
+
+message StandardMessage{
+  string statusCode = 1;
+  string message = 2;
+  AuditMessage audit = 3;
+}
+
+
+service CustomerGRPC{
+  rpc Login(LoginMessage) returns (LoginDetail) {};
+  rpc Signup(SignupMessage) returns (UserInformation) {};
+
+  rpc UpdateInformation (UpdateInformationMessage) returns (UserInformation) {};
+  rpc ChangePassword (ChangePasswordMessage) returns (StandardMessage) {};
+
+  rpc RemindPassword (RemindPasswordMessage) returns (StandardMessage) {};
+  rpc RetakePassword (RetakePasswordMessage) returns (StandardMessage) {};
+
+  rpc WithDraw (WithDrawMessage) returns (StandardMessage) {};
+  rpc TopUp (TopUpMessage) returns (StandardMessage) {};
+}

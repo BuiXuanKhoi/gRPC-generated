@@ -1,0 +1,23 @@
+syntax ="proto3";
+
+package org.example.generated;
+option java_generate_equals_and_hash=true;
+option java_multiple_files = true;
+
+
+
+message SuccessMessage{
+  int32 statusCode = 1;
+  string message = 2;
+}
+
+message ErrorMessage{
+  int32 statusCode = 1;
+  string message = 2;
+  string reason = 3;
+}
+
+message ErrorMessageWithDetail{
+  ErrorMessage errorMessage = 1;
+  map<string, string> detail = 2;
+}
